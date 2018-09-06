@@ -1,10 +1,9 @@
 package shreyas.joshi.jupiter;
 
 import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.pm.ResolveInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -28,7 +27,6 @@ public class DeviceInfo
     public String getSecurityPatch()
     {
         String secPatch = "Security Patch Version: " + Build.VERSION.SECURITY_PATCH;
-        Log.i(deviceInfo, secPatch);
         return secPatch;
     }
 
@@ -57,8 +55,6 @@ public class DeviceInfo
                 version = "Pie";
                 break;
         }
-
-        Log.i(deviceInfo,"Running Android " + Build.VERSION.RELEASE + " (" + version + ")");
         return "Running Android " + Build.VERSION.RELEASE + " (" + version + ")";
     }
 
@@ -112,8 +108,6 @@ public class DeviceInfo
         }
 
         result = "WiFi Security Protocol for " + currentSSID + ": " + WifiType;
-
-        Log.i(deviceInfo, result);
         return result;
     }
 
@@ -145,8 +139,6 @@ public class DeviceInfo
                 break;
         }
 
-        Log.i(deviceInfo, "Battery Health: " + healthStatus);
-
         return healthStatus;
     }
 
@@ -166,8 +158,20 @@ public class DeviceInfo
 
         ramUsage = "Ram Usage: " + df.format(availableMemory) + " GB available out of " + df.format(totalMemory) + "GB";
 
-        Log.i(deviceInfo, ramUsage);
         return ramUsage;
+    }
+
+    public void getInstalledApplications()
+    {
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> installedApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
+
+        for(ResolveInfo app : installedApps)
+        {
+            String appName = app.loadLabel(context.getPackageManager()).toString();
+            Log.i(deviceInfo, appName);
+        }
     }
 }
 
