@@ -3,13 +3,11 @@ package shreyas.joshi.jupiter;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -18,10 +16,20 @@ public class DeviceInfo
 {
     Context context;
     String deviceInfo = "DeviceInfo";
+    String wifiSecurity;
+    String networkSSID;
+
+    public String versionNo;
+    public String versionName;
+    public String versionCode;
 
     public DeviceInfo(Context mContext)
     {
         context = mContext;
+        versionNo = Build.VERSION.RELEASE;
+        versionCode = Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
+        setOSVersion();
+        setWifiSecurity();
     }
 
     public String getSecurityPatch()
@@ -30,7 +38,7 @@ public class DeviceInfo
         return secPatch;
     }
 
-    public String getOSVersion()
+    public void setOSVersion()
     {
         String version = "";
         String versionCode = Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
@@ -55,13 +63,13 @@ public class DeviceInfo
                 version = "Pie";
                 break;
         }
-        return "Running Android " + Build.VERSION.RELEASE + " (" + version + ")";
+
+        versionName = version;
     }
 
-    public String getWifiSecurity()
+    public void setWifiSecurity()
     {
         String WifiType = "";
-        String result;
 
         //Get access to WiFi service
         WifiManager wifi = (WifiManager)context.getSystemService(context.WIFI_SERVICE);
@@ -77,7 +85,7 @@ public class DeviceInfo
             //Get capabilities of the connected WiFi network
             for(ScanResult network : networkList)
             {
-                String networkSSID = network.SSID;
+                networkSSID = network.SSID;
                 if(currentSSID.contains(networkSSID))
                 {
                     String networkCapabilities = network.capabilities;
@@ -107,8 +115,26 @@ public class DeviceInfo
             }
         }
 
-        result = "WiFi Security Protocol for " + currentSSID + ": " + WifiType;
-        return result;
+        wifiSecurity = WifiType;
+    }
+
+    public String getRamUsage()
+    {
+        String ramUsage;
+        DecimalFormat df = new DecimalFormat("###.##");
+
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        activityManager.getMemoryInfo(memoryInfo);
+
+        double totalMemory = memoryInfo.totalMem;
+        totalMemory /= 1000000000;
+        double availableMemory = memoryInfo.availMem;
+        availableMemory /= 1000000000;
+
+        ramUsage = "Ram Usage: " + df.format(availableMemory) + " GB available out of " + df.format(totalMemory) + "GB";
+
+        return ramUsage;
     }
 
     public String getBatteryHealth(Intent intent)
@@ -141,37 +167,4 @@ public class DeviceInfo
 
         return healthStatus;
     }
-
-    public String getRamUsage()
-    {
-        String ramUsage;
-        DecimalFormat df = new DecimalFormat("###.##");
-
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        activityManager.getMemoryInfo(memoryInfo);
-
-        double totalMemory = memoryInfo.totalMem;
-        totalMemory /= 1000000000;
-        double availableMemory = memoryInfo.availMem;
-        availableMemory /= 1000000000;
-
-        ramUsage = "Ram Usage: " + df.format(availableMemory) + " GB available out of " + df.format(totalMemory) + "GB";
-
-        return ramUsage;
-    }
-
-    public void getInstalledApplications()
-    {
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> installedApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
-
-        for(ResolveInfo app : installedApps)
-        {
-            String appName = app.loadLabel(context.getPackageManager()).toString();
-            Log.i(deviceInfo, appName);
-        }
-    }
 }
-

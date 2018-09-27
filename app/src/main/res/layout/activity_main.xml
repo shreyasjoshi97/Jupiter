@@ -61,4 +61,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBatteryHealth" />
 
+    <ScrollView
+        android:id="@+id/scrollLogs"
+        android:layout_width="349dp"
+        android:layout_height="305dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtVersion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRAMUsage"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtLogs"
+                android:layout_width="284dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="28dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="215dp" />
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

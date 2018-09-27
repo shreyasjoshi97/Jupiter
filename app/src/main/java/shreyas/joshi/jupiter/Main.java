@@ -6,16 +6,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 public class Main extends AppCompatActivity {
+    DeviceInfo deviceInfo;
+    ApplicationInfo applicationInfo;
 
-    private TextView mTextMessage;
-    private DeviceInfo deviceInfo;
+    ScrollView scrollLogs;
 
     TextView txtVersion;
     TextView txtOSVersion;
@@ -23,6 +21,7 @@ public class Main extends AppCompatActivity {
     TextView txtWifiSecurity;
     TextView txtBatteryHealth;
     TextView txtRAMUsage;
+    TextView txtLogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +35,21 @@ public class Main extends AppCompatActivity {
         txtWifiSecurity = findViewById(R.id.txtWiFiSecurity);
         txtBatteryHealth = findViewById(R.id.txtBatteryHealth);
         txtRAMUsage = findViewById(R.id.txtRAMUsage);
+        txtLogs = findViewById(R.id.txtLogs);
+
+        scrollLogs = findViewById(R.id.scrollLogs);
+        scrollLogs.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollLogs.smoothScrollTo(0, txtLogs.getTop());
+            }
+        });
 
         deviceInfo = new DeviceInfo(getApplicationContext());
         showDeviceInfo();
+
+        applicationInfo = new ApplicationInfo(getApplicationContext(), deviceInfo);
+        showApplicationInfo();
     }
 
     /**
@@ -47,10 +58,8 @@ public class Main extends AppCompatActivity {
      */
     public void setVersionNumber()
     {
-        String versionNumber = "0.1.1";
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
-        String buildNumber = dateFormat.format(date);
+        String versionNumber = "0.2.0";
+        String buildNumber = "180927";
         TextView txtVersion = findViewById(R.id.txtVersion);
         txtVersion.setText(versionNumber + "-" + buildNumber);
     }
@@ -61,12 +70,18 @@ public class Main extends AppCompatActivity {
      */
     private void showDeviceInfo()
     {
-        txtOSVersion.setText(deviceInfo.getOSVersion());
+        txtOSVersion.setText(deviceInfo.versionName);
         txtSecurityPatch.setText(deviceInfo.getSecurityPatch());
-        txtWifiSecurity.setText(deviceInfo.getWifiSecurity());
+        txtWifiSecurity.setText(deviceInfo.wifiSecurity);
         txtRAMUsage.setText(deviceInfo.getRamUsage());
         startReceiverBatteryHealth();
-        deviceInfo.getInstalledApplications();
+    }
+
+    private void showApplicationInfo()
+    {
+        //applicationInfo.getInstalledApplications();
+        //applicationInfo.getRunningApplications();
+        txtLogs.setText(applicationInfo.getProcessLogs());
     }
 
     public void startReceiverBatteryHealth()
