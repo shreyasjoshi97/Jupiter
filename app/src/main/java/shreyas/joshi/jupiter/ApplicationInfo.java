@@ -74,7 +74,7 @@ public class ApplicationInfo {
 
     public String createProcessLogs(String command)
     {
-        String psLogs = "";
+        StringBuilder stringBuilder = new StringBuilder();
         try
         {
             Process process = Runtime.getRuntime().exec(new String[] {"su", "-c", command});
@@ -85,22 +85,25 @@ public class ApplicationInfo {
                 //wait
             }
 
+            String psLogs = "";
+
             while(bufferedReader.ready())
             {
 
                 String psInfo;
                 while ((psInfo = bufferedReader.readLine()) != null)
                 {
-                    psLogs += psInfo + "\n";
+                    stringBuilder.append(psInfo + "\n");
                 }
             }
+            bufferedReader.close();
         }
         catch (IOException ex)
         {
             Log.d(appInfo, "IO Exception: " + ex.getMessage());
         }
 
-        return psLogs;
+        return stringBuilder.toString();
     }
 
     /*public void writeToFile(String info)

@@ -22,6 +22,7 @@ public class Main extends AppCompatActivity {
     TextView txtBatteryHealth;
     TextView txtRAMUsage;
     TextView txtLogs;
+    TextView txtServerMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class Main extends AppCompatActivity {
         txtBatteryHealth = findViewById(R.id.txtBatteryHealth);
         txtRAMUsage = findViewById(R.id.txtRAMUsage);
         txtLogs = findViewById(R.id.txtLogs);
+        txtServerMsg = findViewById(R.id.txtServerMsg);
 
         scrollLogs = findViewById(R.id.scrollLogs);
         scrollLogs.post(new Runnable() {
@@ -50,6 +52,8 @@ public class Main extends AppCompatActivity {
 
         applicationInfo = new ApplicationInfo(getApplicationContext(), deviceInfo);
         showApplicationInfo();
+
+        transmitInfo();
     }
 
     /**
@@ -82,6 +86,11 @@ public class Main extends AppCompatActivity {
         //applicationInfo.getInstalledApplications();
         //applicationInfo.getRunningApplications();
         txtLogs.setText(applicationInfo.getProcessLogs());
+    }
+
+    private void transmitInfo()
+    {
+        new SocketClient().execute("This is a test message from Jupiter to Amalthea");
     }
 
     public void startReceiverBatteryHealth()
