@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -23,6 +25,7 @@ public class Main extends AppCompatActivity {
     TextView txtRAMUsage;
     TextView txtLogs;
     TextView txtServerMsg;
+    Button btnSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,14 @@ public class Main extends AppCompatActivity {
         txtRAMUsage = findViewById(R.id.txtRAMUsage);
         txtLogs = findViewById(R.id.txtLogs);
         txtServerMsg = findViewById(R.id.txtServerMsg);
+
+        btnSend = findViewById(R.id.btnSend);
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                String pass = "This is a test message from Jupiter to Amalthea";
+                new SocketClient().execute(pass);
+            }
+        });
 
         scrollLogs = findViewById(R.id.scrollLogs);
         scrollLogs.post(new Runnable() {
@@ -62,8 +73,9 @@ public class Main extends AppCompatActivity {
      */
     public void setVersionNumber()
     {
-        String versionNumber = "0.2.0";
-        String buildNumber = "180927";
+        String versionNumber = "0.2.1";
+        String buildNumber = "181124" +
+                "";
         TextView txtVersion = findViewById(R.id.txtVersion);
         txtVersion.setText(versionNumber + "-" + buildNumber);
     }
@@ -90,7 +102,7 @@ public class Main extends AppCompatActivity {
 
     private void transmitInfo()
     {
-        new SocketClient().execute("This is a test message from Jupiter to Amalthea");
+        new SocketClient().execute("Test\n");
     }
 
     public void startReceiverBatteryHealth()

@@ -4,12 +4,19 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
+import java.net.URLEncoder;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class SocketClient extends AsyncTask<String, Void, Void> {
 
@@ -20,43 +27,37 @@ public class SocketClient extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... message)
     {
         URL url;
-        StringBuilder stringBuilder = new StringBuilder();
         try
         {
             url = new URL(serverUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(60000);
             connection.setConnectTimeout(30000);
-            connection.setRequestProperty("Connection", "Keep-Alive");
-            connection.setRequestProperty("Keep-Alive", "Header");
+            connection.setRequestMethod("POST");
             connection.setDoInput(true);
             connection.setDoOutput(true);
 
+            OutputStream outputStream = connection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            bufferedWriter.write("Message from Jupiter to Amalthea");
 
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-            outputStreamWriter.write(message[0]);
+            bufferedWriter.flush();
+            bufferedWriter.close();
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            int responseCode = connection.getResponseCode();
 
-            if(connection.getResponseCode() == 200)
-            {
-                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            }
-            String result;
+            if(responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                String response = "";
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-            while (!bufferedReader.ready()) {
-                //Wait
-            }
-
-            while (bufferedReader.ready()) {
-                while ((result = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(result + "\n");
+                while ((line = bufferedReader.readLine()) != null)
+                {
+                        response += line + "\n";
                 }
+                Log.i(socketLog, response);
             }
-            bufferedReader.close();
-            outputStreamWriter.flush();
-            outputStreamWriter.close();
-            result = stringBuilder.toString();
-            Log.i(socketLog, result);
+
         }
         catch (Exception ex)
         {
