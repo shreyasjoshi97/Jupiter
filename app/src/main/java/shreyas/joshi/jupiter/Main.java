@@ -95,9 +95,11 @@ public class Main extends AppCompatActivity {
 
     private void showApplicationInfo()
     {
-        //applicationInfo.getInstalledApplications();
+        applicationInfo.getInstalledApplications();
         //applicationInfo.getRunningApplications();
-        txtLogs.setText(applicationInfo.getProcessLogs());
+        //txtLogs.setText(applicationInfo.getProcessLogs());
+        //applicationInfo.getInstalledApplications();
+        applicationInfo.getPermissions();
     }
 
     private void transmitInfo()

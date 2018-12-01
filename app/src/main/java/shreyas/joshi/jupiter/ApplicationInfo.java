@@ -3,6 +3,8 @@ package shreyas.joshi.jupiter;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
@@ -35,7 +37,7 @@ public class ApplicationInfo {
         deviceInfo = dInfo;
     }
 
-    public void getInstalledApplications()
+    public String getInstalledApplications()
     {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -46,16 +48,43 @@ public class ApplicationInfo {
             String appName = app.loadLabel(context.getPackageManager()).toString();
             Log.i(appInfo, appName);
         }
+
+        return "";
     }
 
     public void getRunningApplications()
     {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> appProcessInfos = activityManager.getRunningAppProcesses();
+        List<ActivityManager.RunningAppProcessInfo> appProcessInfo = activityManager.getRunningAppProcesses();
 
-        for(ActivityManager.RunningAppProcessInfo info : appProcessInfos)
+        for(ActivityManager.RunningAppProcessInfo info : appProcessInfo)
         {
             Log.i(appInfo, info.processName);
+        }
+    }
+
+    public void getPermissions()
+    {
+        try
+        {
+            for (ResolveInfo app : installedApps)
+            {
+                String packageName = app.activityInfo.applicationInfo.packageName;
+                Log.i(appInfo, packageName);
+                PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+
+                for(int i = 0; i < packageInfo.requestedPermissions.length; i++) {
+                    if ((packageInfo.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0)
+                    {
+                        String permission = app.resolvePackageName + packageInfo.requestedPermissions[i];
+                        //Log.i(appInfo, permission);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.i(appInfo, ex.getMessage());
         }
     }
 
