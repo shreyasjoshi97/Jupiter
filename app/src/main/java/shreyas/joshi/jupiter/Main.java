@@ -95,11 +95,21 @@ public class Main extends AppCompatActivity {
 
     private void showApplicationInfo()
     {
-        applicationInfo.getInstalledApplications();
+        applicationInfo.getInstalledApplications(); //THIS LINE MUST ALWAYS GO BEFORE GET PERMISSIONS
+        if(deviceInfo.getRoot())
+        {
+            txtLogs.setText(applicationInfo.getProcessLogs());
+        }
+        else
+        {
+            txtLogs.setText(applicationInfo.getPermissions());
+        }
+
+
         //applicationInfo.getRunningApplications();
-        //txtLogs.setText(applicationInfo.getProcessLogs());
+        //txtLogs.setText(applicationInfo.createProcessLogs(""));
         //applicationInfo.getInstalledApplications();
-        applicationInfo.getPermissions();
+        //txtLogs.setText(applicationInfo.getPermissions());
     }
 
     private void transmitInfo()

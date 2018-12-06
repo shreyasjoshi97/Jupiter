@@ -9,20 +9,9 @@ import android.content.pm.ResolveInfo;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class ApplicationInfo {
     DeviceInfo deviceInfo;
@@ -30,6 +19,9 @@ public class ApplicationInfo {
     Context context;
     String appInfo = "ApplicationInfo";
     List<ResolveInfo> installedApps;
+
+    public ApplicationInfo()
+    { }
 
     public ApplicationInfo(Context mContext, DeviceInfo dInfo)
     {
@@ -42,13 +34,14 @@ public class ApplicationInfo {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         installedApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
-
-        for(ResolveInfo app : installedApps)
+        Log.i(appInfo, Integer.toString(installedApps.size()));
+        for(int i = 0; i < installedApps.size() - 10; i++)
         {
-            String appName = app.loadLabel(context.getPackageManager()).toString();
+            String appName = installedApps.get(i).loadLabel(context.getPackageManager()).toString();
             Log.i(appInfo, appName);
         }
-
+        //ResolveInfo lastapp = installedApps.get(installedApps.size());
+        //String appName = lastapp.loadLabel(context.getPackageManager()).toString();
         return "";
     }
 
@@ -63,29 +56,30 @@ public class ApplicationInfo {
         }
     }
 
-    public void getPermissions()
+    public String getPermissions()
     {
+        String permissions = "";
         try
         {
             for (ResolveInfo app : installedApps)
             {
                 String packageName = app.activityInfo.applicationInfo.packageName;
-                Log.i(appInfo, packageName);
                 PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
 
-                for(int i = 0; i < packageInfo.requestedPermissions.length; i++) {
+                for(int i = 0; i < packageInfo.requestedPermissions.length - 1; i++) {
                     if ((packageInfo.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0)
                     {
-                        String permission = app.resolvePackageName + packageInfo.requestedPermissions[i];
-                        //Log.i(appInfo, permission);
+                        permissions += packageInfo.requestedPermissions[i] + "\n";
                     }
                 }
             }
+
         }
         catch (Exception ex)
         {
             Log.i(appInfo, ex.getMessage());
         }
+        return permissions;
     }
 
     public String getProcessLogs()
@@ -131,7 +125,7 @@ public class ApplicationInfo {
         {
             Log.d(appInfo, "IO Exception: " + ex.getMessage());
         }
-
+        Log.i(appInfo, stringBuilder.toString());
         return stringBuilder.toString();
     }
 

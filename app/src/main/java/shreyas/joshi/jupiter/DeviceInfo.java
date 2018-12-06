@@ -8,7 +8,9 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.util.Log;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class DeviceInfo
     public String versionNo;
     public String versionName;
     public String versionCode;
+    private boolean isRooted;
 
     public DeviceInfo(Context mContext)
     {
@@ -30,6 +33,22 @@ public class DeviceInfo
         versionCode = Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
         setOSVersion();
         setWifiSecurity();
+        checkRoot();
+    }
+
+    private void checkRoot()
+    {
+        ApplicationInfo appInfo = new ApplicationInfo(context, this);
+        String testRoot = appInfo.getProcessLogs();
+
+        if(testRoot == "" || testRoot == null)
+        {
+            isRooted = false;
+        }
+        else
+        {
+            isRooted = true;
+        }
     }
 
     public String getSecurityPatch()
@@ -38,28 +57,33 @@ public class DeviceInfo
         return secPatch;
     }
 
+    public boolean getRoot()
+    {
+        return isRooted;
+    }
+
     public void setOSVersion()
     {
         String version = "";
         String versionCode = Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
-        char code = versionCode.charAt(0);
+        char code = versionNo.charAt(0);
 
         //Match with codename
         switch(code)
         {
-            case 'L':
+            case '5':
                 version = "Lollipop";
                 break;
-            case 'M':
+            case '6':
                 version = "Marshmallow";
                 break;
-            case 'N':
+            case '7':
                 version = "Nougat";
                 break;
-            case 'O':
+            case '8':
                 version = "Oreo";
                 break;
-            case 'P':
+            case '9':
                 version = "Pie";
                 break;
         }
