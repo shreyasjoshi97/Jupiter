@@ -104,7 +104,7 @@ public class Main extends AppCompatActivity {
         {
             txtLogs.setText(applicationInfo.getPermissions());
         }
-
+        applicationInfo.getRunningAppInfo();
 
         //applicationInfo.getRunningApplications();
         //txtLogs.setText(applicationInfo.createProcessLogs(""));

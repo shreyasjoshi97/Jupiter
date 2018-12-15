@@ -84,13 +84,13 @@ public class ApplicationInfo {
 
     public String getProcessLogs()
     {
-        String command = "ps";
+        String command = "top -n 1";
 
         int versionNo = Integer.parseInt(String.valueOf(deviceInfo.versionNo.charAt(0)));
-        if(versionNo >= 8)
+        /*if(versionNo >= 8)
         {
             command += " -o NAME";
-        }
+        }*/
 
         return createProcessLogs(command);
     }
@@ -108,8 +108,6 @@ public class ApplicationInfo {
                 //wait
             }
 
-            String psLogs = "";
-
             while(bufferedReader.ready())
             {
 
@@ -125,9 +123,23 @@ public class ApplicationInfo {
         {
             Log.d(appInfo, "IO Exception: " + ex.getMessage());
         }
-        Log.i(appInfo, stringBuilder.toString());
+        String topResults = stringBuilder.toString();
+        Log.i(appInfo, topResults);
+        BehaviourAnalysis ba = new BehaviourAnalysis();
+        ba.parseTop(topResults);
         return stringBuilder.toString();
     }
+
+    public void getRunningAppInfo()
+    {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = activityManager.getRunningAppProcesses();
+        for(ActivityManager.RunningAppProcessInfo appProcess : runningAppProcesses)
+        {
+            Log.i(appInfo, appProcess.processName);
+        }
+    }
+
 
     /*public void writeToFile(String info)
     {
