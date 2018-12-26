@@ -20,9 +20,6 @@ public class ApplicationInfo {
     String appInfo = "ApplicationInfo";
     List<ResolveInfo> installedApps;
 
-    public ApplicationInfo()
-    { }
-
     public ApplicationInfo(Context mContext, DeviceInfo dInfo)
     {
         context = mContext;
@@ -38,7 +35,7 @@ public class ApplicationInfo {
         for(int i = 0; i < installedApps.size() - 10; i++)
         {
             String appName = installedApps.get(i).loadLabel(context.getPackageManager()).toString();
-            Log.i(appInfo, appName);
+            //Log.i(appInfo, appName);
         }
         //ResolveInfo lastapp = installedApps.get(installedApps.size());
         //String appName = lastapp.loadLabel(context.getPackageManager()).toString();
@@ -125,8 +122,6 @@ public class ApplicationInfo {
         }
         String topResults = stringBuilder.toString();
         Log.i(appInfo, topResults);
-        BehaviourAnalysis ba = new BehaviourAnalysis();
-        ba.parseTop(topResults);
         return stringBuilder.toString();
     }
 

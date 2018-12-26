@@ -1,22 +1,27 @@
 package shreyas.joshi.jupiter;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Main extends AppCompatActivity {
     DeviceInfo deviceInfo;
     ApplicationInfo applicationInfo;
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
 
     ScrollView scrollLogs;
-
     TextView txtVersion;
     TextView txtOSVersion;
     TextView txtSecurityPatch;
@@ -45,8 +50,7 @@ public class Main extends AppCompatActivity {
         btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                String pass = "This is a test message from Jupiter to Amalthea";
-                new SocketClient().execute(pass);
+                Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,8 +69,17 @@ public class Main extends AppCompatActivity {
         showApplicationInfo();
 
         transmitInfo();
+        setupJob();
     }
 
+    public void setupJob()
+    {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, BehaviourAnalysis.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(),
+                15000, pendingIntent);
+    }
     /**
      * Sets version number of the application for display
      * Format: MAJOR.MINOR.PATCH-BUILD
@@ -128,9 +141,4 @@ public class Main extends AppCompatActivity {
         };
         Main.this.registerReceiver(broadcastReceiver, intentFilter);
     }
-
-    /*public void stopReceiverBatteryHealth(BroadcastReceiver broadcastReceiver)
-    {
-        Main.this.unregisterReceiver(broadcastReceiver);
-    }*/
 }
