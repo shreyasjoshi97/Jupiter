@@ -3,11 +3,13 @@ package shreyas.joshi.jupiter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,11 +29,7 @@ public class BehaviourAnalysis extends BroadcastReceiver {
         Log.i(bInfo, "Receiving");
         this.context = context;
         timestamp = getTimeStamp();
-        createProcessLogs();
-
-        File file = new File(context.getFilesDir(), fileName);
-        file.delete();
-    }
+        createProcessLogs();    }
 
     public void createProcessLogs()
     {
@@ -106,7 +104,7 @@ public class BehaviourAnalysis extends BroadcastReceiver {
 
     public boolean checkFileExists()
     {
-        File file = new File(context.getFilesDir(), fileName);
+        File file = new File(context.getExternalFilesDir("/sampleLogs/"), fileName);
         return file.exists();
     }
 
@@ -114,9 +112,11 @@ public class BehaviourAnalysis extends BroadcastReceiver {
     {
         try
         {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
+            File file = new File(context.getExternalFilesDir(null).getAbsolutePath() + "/sampleLogs", fileName);
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
             //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("C:\\Documents\\log.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(data);
+            outputStreamWriter.append(data);
             outputStreamWriter.close();
         }
         catch (Exception ex)
@@ -141,8 +141,13 @@ public class BehaviourAnalysis extends BroadcastReceiver {
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
                     if(receiveString.contains("shreyas.joshi.resourcehog"))
                     {
-                        Log.i("ResourceHog: ", receiveString);
+                        Log.i("ResourceHog", receiveString);
                     }
+                    else if(receiveString.contains("shreyas.joshi.jupiter"))
+                    {
+                        Log.i("JoshiJupiter", receiveString);
+                    }
+
                     stringBuilder.append(receiveString).append("\n");
                 }
 
