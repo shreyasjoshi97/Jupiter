@@ -3,34 +3,77 @@ package shreyas.joshi.jupiter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-public class BehaviourAnalysis extends BroadcastReceiver {
+/***
+ *
+ */
+public class BehaviourAnalysis extends BroadcastReceiver implements AsyncResponse {
     String bInfo = "Behaviour Info";
     Context context;
-    String fileName = "log.txt";
+    String logFile = "log.txt";
+    String timeFile = "time.txt";
     Timestamp timestamp;
+    FileIO file;
+    List<String> installedApps;
     //behaviourTask bTask;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(bInfo, "Receiving");
-        this.context = context;
-        timestamp = getTimeStamp();
-        createProcessLogs();    }
+        try
+        {
+            Log.i(bInfo, "Receiving");
+            this.context = context;
+            timestamp = getTimeStamp();
+            ApplicationInfo a = new ApplicationInfo(context);
+            installedApps = a.getInstalledApplications();
+            file = new FileIO(context);
 
+            if (file.checkFileExists(timeFile))
+            {
+
+                String time = file.readFile(timeFile);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date parseDate = sdf.parse(time);
+                Timestamp startingTimeStamp = new Timestamp(parseDate.getTime());
+                long diff = timestamp.getTime() - startingTimeStamp.getTime();
+                diff = diff / (1000 * 60 * 60 * 2);
+                if (diff == 2)
+                {
+                    sendLogs();
+                    file.deleteFile(timeFile);
+                }
+                else
+                {
+                    createProcessLogs();
+                }
+            }
+            else
+            {
+                file.writeToFile(timestamp.toString(), timeFile);
+                createProcessLogs();
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    /***
+     *
+     */
     public void createProcessLogs()
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -63,6 +106,10 @@ public class BehaviourAnalysis extends BroadcastReceiver {
         parseTop(stringBuilder.toString());
     }
 
+    /***
+     *
+     * @param data
+     */
     public void parseTop(String data)
     {
         String serverMessage = "";
@@ -84,17 +131,22 @@ public class BehaviourAnalysis extends BroadcastReceiver {
             }
         }
 
-        if(!checkFileExists())
+        if(!file.checkFileExists(logFile))
         {
             serverMessage = timestamp + "\n" + serverMessage;
 
         }
 
-        writeToFile(serverMessage);
+        file.writeToFile(serverMessage, logFile);
 
-        Log.i(bInfo, readFile());
+        Log.i(bInfo, file.readFile(logFile));
     }
 
+    /***
+     *
+     * @return
+     */
+    @NonNull
     private Timestamp getTimeStamp()
     {
         Date date = new Date();
@@ -102,22 +154,31 @@ public class BehaviourAnalysis extends BroadcastReceiver {
         return new Timestamp(time);
     }
 
-    public boolean checkFileExists()
-    {
-        File file = new File(context.getExternalFilesDir("/sampleLogs/"), fileName);
-        return file.exists();
-    }
-
-    public void writeToFile(String data)
+    /***
+     *
+     */
+    public void sendLogs()
     {
         try
         {
-            File file = new File(context.getExternalFilesDir(null).getAbsolutePath() + "/sampleLogs", fileName);
-            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-            //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("C:\\Documents\\log.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.append(data);
-            outputStreamWriter.close();
+            SocketClient socketClient = new SocketClient();
+            socketClient.delegate = this;
+            String contents = file.readFile(logFile);
+            String send = "";
+
+            BufferedReader bufferedReader = new BufferedReader(new StringReader(contents));
+            String line;
+            while((line = bufferedReader.readLine()) != null)
+            {
+                for(String app : installedApps)
+                {
+                    if(line.contains(app))
+                    {
+                        send += line;
+                    }
+                }
+                socketClient.execute("^" + send);
+            }
         }
         catch (Exception ex)
         {
@@ -125,39 +186,9 @@ public class BehaviourAnalysis extends BroadcastReceiver {
         }
     }
 
-    public String readFile()
+    public void processOutput(String result)
     {
-        String ret = "";
-
-        try {
-            InputStream inputStream = context.openFileInput(fileName);
-
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    if(receiveString.contains("shreyas.joshi.resourcehog"))
-                    {
-                        Log.i("ResourceHog", receiveString);
-                    }
-                    else if(receiveString.contains("shreyas.joshi.jupiter"))
-                    {
-                        Log.i("JoshiJupiter", receiveString);
-                    }
-
-                    stringBuilder.append(receiveString).append("\n");
-                }
-
-                inputStream.close();
-                ret = stringBuilder.toString();
-            }
-        }
-        catch (Exception e) {
-        }
-
-        return ret;
+        String[] columns = result.split(",");
+        file.writeToFile(result, columns[0] + ".txt");
     }
 }

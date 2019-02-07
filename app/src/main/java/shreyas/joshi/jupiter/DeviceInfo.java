@@ -38,8 +38,8 @@ public class DeviceInfo
 
     private void checkRoot()
     {
-        ApplicationInfo appInfo = new ApplicationInfo(context, this);
-        String testRoot = appInfo.getProcessLogs();
+        ApplicationInfo appInfo = new ApplicationInfo(context);
+        String testRoot = appInfo.createProcessLogs("top -n 1");
 
         if(testRoot == "" || testRoot == null)
         {

@@ -47,9 +47,13 @@ public class Main extends AppCompatActivity {
         txtLogs = findViewById(R.id.txtLogs);
         txtServerMsg = findViewById(R.id.txtServerMsg);
 
+        applicationInfo = new ApplicationInfo(getApplicationContext(), deviceInfo);
+        showApplicationInfo();
+
         btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
+                applicationInfo.sendLogs();
                 Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -65,13 +69,13 @@ public class Main extends AppCompatActivity {
         deviceInfo = new DeviceInfo(getApplicationContext());
         showDeviceInfo();
 
-        applicationInfo = new ApplicationInfo(getApplicationContext(), deviceInfo);
-        showApplicationInfo();
-
         transmitInfo();
         setupJob();
     }
 
+    /***
+     *
+     */
     public void setupJob()
     {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -80,8 +84,9 @@ public class Main extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(),
                 15000, pendingIntent);
     }
-    /**
-     * Sets version number of the application for display
+
+    /***
+     * Sets version number of the application
      * Format: MAJOR.MINOR.PATCH-BUILD
      */
     public void setVersionNumber()
@@ -93,7 +98,7 @@ public class Main extends AppCompatActivity {
         txtVersion.setText(versionNumber + "-" + buildNumber);
     }
 
-    /**
+    /***
      * Retrieves device information
      * OS Version, Security patch, Wi-Fi security, RAM usage, Battery health
      */
@@ -109,7 +114,8 @@ public class Main extends AppCompatActivity {
     private void showApplicationInfo()
     {
         applicationInfo.getInstalledApplications(); //THIS LINE MUST ALWAYS GO BEFORE GET PERMISSIONS
-        if(deviceInfo.getRoot())
+        applicationInfo.getPermissions();
+        /*if(deviceInfo.getRoot())
         {
             txtLogs.setText(applicationInfo.getProcessLogs());
         }
@@ -117,7 +123,7 @@ public class Main extends AppCompatActivity {
         {
             txtLogs.setText(applicationInfo.getPermissions());
         }
-        applicationInfo.getRunningAppInfo();
+        applicationInfo.getRunningAppInfo();*/
 
         //applicationInfo.getRunningApplications();
         //txtLogs.setText(applicationInfo.createProcessLogs(""));
