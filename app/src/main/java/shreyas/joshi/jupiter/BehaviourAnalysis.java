@@ -1,9 +1,13 @@
 package shreyas.joshi.jupiter;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -42,17 +46,16 @@ public class BehaviourAnalysis extends BroadcastReceiver implements AsyncRespons
 
             if (file.checkFileExists(timeFile))
             {
-
                 String time = file.readFile(timeFile);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date parseDate = sdf.parse(time);
                 Timestamp startingTimeStamp = new Timestamp(parseDate.getTime());
                 long diff = timestamp.getTime() - startingTimeStamp.getTime();
                 diff = diff / (1000 * 60 * 60 * 2);
-                if (diff == 2)
+                if (diff >= 2)
                 {
-                    sendLogs();
-                    file.deleteFile(timeFile);
+                    //sendLogs();
+                    //file.deleteFile(timeFile);
                 }
                 else
                 {
@@ -67,7 +70,7 @@ public class BehaviourAnalysis extends BroadcastReceiver implements AsyncRespons
         }
         catch (Exception ex)
         {
-
+            Log.i(bInfo, ex.getMessage());
         }
     }
 
@@ -121,20 +124,19 @@ public class BehaviourAnalysis extends BroadcastReceiver implements AsyncRespons
             if(startReading)
             {
                 String[] split = line.split("\\s+");
-                line = TextUtils.join(",", split);
-                serverMessage += line + "," + timestamp + "\n";
+                String name = split[split.length-1];
+                if(installedApps.contains(name) && !name.equals("shreyas.joshi.jupiter"))
+                {
+                    String[] log = {name, split[4], split[7], split[8], split[9]};
+                    line = TextUtils.join(",", log);
+                    serverMessage += line + "," + timestamp + "\n";
+                }
             }
 
             if(line.contains("PID"))
             {
                 startReading = true;
             }
-        }
-
-        if(!file.checkFileExists(logFile))
-        {
-            serverMessage = timestamp + "\n" + serverMessage;
-
         }
 
         file.writeToFile(serverMessage, logFile);

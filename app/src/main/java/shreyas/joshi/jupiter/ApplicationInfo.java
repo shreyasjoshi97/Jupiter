@@ -11,18 +11,21 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 /***
  *
  */
-public class ApplicationInfo {
+public class ApplicationInfo implements AsyncResponse{
     DeviceInfo deviceInfo;
     FileIO file;
     Context context;
     String appInfo = "ApplicationInfo";
     String fileName = "permissions.txt";
+    String storeName = "Static Results.txt";
+    boolean wait;
     List<ResolveInfo> installedApps;
 
     /***
@@ -70,6 +73,10 @@ public class ApplicationInfo {
     public void getPermissions()
     {
         String permissions;
+        if(file.checkFileExists(fileName))
+        {
+            file.deleteFile(fileName);
+        }
         for (ResolveInfo app : installedApps) {
             try {
                 String packageName = app.activityInfo.applicationInfo.packageName;
@@ -148,9 +155,38 @@ public class ApplicationInfo {
      */
     public void sendLogs()
     {
-        SocketClient socketClient = new SocketClient();
-        String content = "|" + file.readFile(fileName);
-        socketClient.execute(content + "~");
+        try
+        {
+            getPermissions();
+
+            String contents =file.readFile(fileName);
+
+            BufferedReader bufferedReader = new BufferedReader(new StringReader(contents));
+            String line;
+            wait = false;
+            while((line = bufferedReader.readLine()) != null)
+            {
+                /*do {
+                    //wait
+                } while(wait);*/
+
+                String data = "|" + line;
+                SocketClient socketClient = new SocketClient();
+                socketClient.delegate = this;
+                socketClient.execute(data);
+                wait = true;
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
+    public void processOutput(String result)
+    {
+        file.writeToFile(result, storeName);
+        Log.i(appInfo, result);
+        wait = false;
+    }
 }

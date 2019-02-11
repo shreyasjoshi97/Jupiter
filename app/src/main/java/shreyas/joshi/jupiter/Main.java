@@ -1,7 +1,10 @@
 package shreyas.joshi.jupiter;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +12,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -47,13 +51,12 @@ public class Main extends AppCompatActivity {
         txtLogs = findViewById(R.id.txtLogs);
         txtServerMsg = findViewById(R.id.txtServerMsg);
 
-        applicationInfo = new ApplicationInfo(getApplicationContext(), deviceInfo);
+        applicationInfo = new ApplicationInfo(getApplicationContext());
         showApplicationInfo();
 
         btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                applicationInfo.sendLogs();
                 Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -69,7 +72,6 @@ public class Main extends AppCompatActivity {
         deviceInfo = new DeviceInfo(getApplicationContext());
         showDeviceInfo();
 
-        transmitInfo();
         setupJob();
     }
 
@@ -114,7 +116,6 @@ public class Main extends AppCompatActivity {
     private void showApplicationInfo()
     {
         applicationInfo.getInstalledApplications(); //THIS LINE MUST ALWAYS GO BEFORE GET PERMISSIONS
-        applicationInfo.getPermissions();
         /*if(deviceInfo.getRoot())
         {
             txtLogs.setText(applicationInfo.getProcessLogs());
