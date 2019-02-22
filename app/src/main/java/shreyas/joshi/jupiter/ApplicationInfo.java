@@ -1,5 +1,6 @@
 package shreyas.joshi.jupiter;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,19 +24,29 @@ public class ApplicationInfo implements AsyncResponse{
     DeviceInfo deviceInfo;
     FileIO file;
     Context context;
+    UICallback uiCallback;
+
     String appInfo = "ApplicationInfo";
     String fileName = "permissions.txt";
     String storeName = "Static Results.txt";
     boolean wait;
+    String combinedResults = "";
     List<ResolveInfo> installedApps;
 
     /***
      *
      * @param mContext
      */
+    public ApplicationInfo(Context mContext, UICallback callback)
+    {
+        context = mContext;
+        uiCallback = callback;
+        file = new FileIO(mContext);
+    }
+
     public ApplicationInfo(Context mContext)
     {
-        context = mContext.getApplicationContext();
+        context = mContext;
         file = new FileIO(mContext);
     }
 
@@ -73,9 +85,11 @@ public class ApplicationInfo implements AsyncResponse{
     public void getPermissions()
     {
         String permissions;
-        if(file.checkFileExists(fileName))
+        combinedResults = "";
+        if(file.checkFileExists(fileName) && file.checkFileExists(storeName))
         {
             file.deleteFile(fileName);
+            file.deleteFile(storeName);
         }
         for (ResolveInfo app : installedApps) {
             try {
@@ -158,23 +172,17 @@ public class ApplicationInfo implements AsyncResponse{
         try
         {
             getPermissions();
-
-            String contents =file.readFile(fileName);
+            String contents = file.readFile(fileName);
+            file.deleteFile(storeName);
 
             BufferedReader bufferedReader = new BufferedReader(new StringReader(contents));
             String line;
-            wait = false;
             while((line = bufferedReader.readLine()) != null)
             {
-                /*do {
-                    //wait
-                } while(wait);*/
-
-                String data = "|" + line;
+                String data = "|" + line + "\n";
                 SocketClient socketClient = new SocketClient();
                 socketClient.delegate = this;
                 socketClient.execute(data);
-                wait = true;
             }
         }
         catch (Exception ex)
@@ -185,6 +193,12 @@ public class ApplicationInfo implements AsyncResponse{
 
     public void processOutput(String result)
     {
+        uiCallback.updateActivity("");
+        result = result.replace("{", "");
+        result = result.replace("}", "");
+        result = result.replace("'", "");
+        combinedResults += result + "\n";
+        uiCallback.updateActivity(combinedResults);
         file.writeToFile(result, storeName);
         Log.i(appInfo, result);
         wait = false;

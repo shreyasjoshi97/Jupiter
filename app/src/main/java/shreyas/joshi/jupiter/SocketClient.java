@@ -5,11 +5,14 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +24,7 @@ public class SocketClient extends AsyncTask<String, Void, String> {
     public String result = "";
     String socketLog = "SocketInfo";
     String serverUrl = "https://amaltheaserver.herokuapp.com/";
+    String serverIP = "192.168.1.89";
 
 
     /***
@@ -38,14 +42,16 @@ public class SocketClient extends AsyncTask<String, Void, String> {
         URL url;
         try
         {
-            url = new URL(serverUrl);
+            /*url = new URL(serverUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(300000);
             connection.setConnectTimeout(300000);
             connection.setRequestMethod("POST");
             connection.setDoInput(true);
             connection.setDoOutput(true);
-            connection.connect();
+            connection.connect();*/
+            InetAddress inetAddress = InetAddress.getByName(serverIP);
+            Socket connection = new Socket(inetAddress, 7000);
 
             try
             {
@@ -57,20 +63,26 @@ public class SocketClient extends AsyncTask<String, Void, String> {
                 //bufferedWriter.close();
 
                 String line;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                InputStream inputStream = connection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 StringBuffer stringBuffer = new StringBuffer();
 
                 while ((line = bufferedReader.readLine()) != null) {
+                    /*if(line.toLowerCase().contains("result start")) {
+                        stringBuffer.append(line);
+                        break;
+                    }*/
                     stringBuffer.append(line);
-                    stringBuffer.append("\n");
                 }
                 bufferedWriter.close();
                 bufferedReader.close();
                 //Log.i(socketLog, result);
-                extractResult(stringBuffer.toString());
+                //extractResult(stringBuffer.toString());
+                result = stringBuffer.toString();
             }
             finally {
-                connection.disconnect();
+                connection.close();
             }
         }
         catch (Exception ex)
@@ -81,7 +93,6 @@ public class SocketClient extends AsyncTask<String, Void, String> {
     }
 
     protected void onPostExecute(String result) {
-        Log.i(socketLog, "Attempting to send result: " + result);
         try {
             if (result != null && !result.equals("")) {
                 delegate.processOutput(result);
@@ -98,7 +109,7 @@ public class SocketClient extends AsyncTask<String, Void, String> {
 
         for(String line : lines)
         {
-            if(line.contains("Result Start"))
+            /*if(line.contains("Result Start"))
             {
                 line = line.replace("Result Start ", "");
                 line = line.replace(" Result End", "");
@@ -110,7 +121,9 @@ public class SocketClient extends AsyncTask<String, Void, String> {
                 Log.i(socketLog, line);
 
                 break;
-            }
+            }*/
+            result += line + "\n";
+            Log.i(socketLog, line);
         }
 
         //result = matcher.group(1);

@@ -1,29 +1,29 @@
 package shreyas.joshi.jupiter;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Main extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main extends AppCompatActivity implements UICallback {
     DeviceInfo deviceInfo;
     ApplicationInfo applicationInfo;
     AlarmManager alarmManager;
-    PendingIntent pendingIntent;
+    //PendingIntent pendingIntent;
+    List<AlarmManager> alarmManagers;
+    List<PendingIntent> pendingIntents;
 
     ScrollView scrollLogs;
     TextView txtVersion;
@@ -32,7 +32,7 @@ public class Main extends AppCompatActivity {
     TextView txtWifiSecurity;
     TextView txtBatteryHealth;
     TextView txtRAMUsage;
-    TextView txtLogs;
+    TextView txtActivity;
     TextView txtServerMsg;
     Button btnSend;
 
@@ -40,7 +40,6 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setVersionNumber();
 
         txtVersion = findViewById(R.id.txtVersion);
         txtOSVersion = findViewById(R.id.txtOSVersion);
@@ -48,16 +47,21 @@ public class Main extends AppCompatActivity {
         txtWifiSecurity = findViewById(R.id.txtWiFiSecurity);
         txtBatteryHealth = findViewById(R.id.txtBatteryHealth);
         txtRAMUsage = findViewById(R.id.txtRAMUsage);
-        txtLogs = findViewById(R.id.txtLogs);
+        txtActivity = findViewById(R.id.txtLogs);
         txtServerMsg = findViewById(R.id.txtServerMsg);
+        alarmManagers = new ArrayList<AlarmManager>();
+        pendingIntents = new ArrayList<PendingIntent>();
 
-        applicationInfo = new ApplicationInfo(getApplicationContext());
+        txtActivity.setText("");
+
+        applicationInfo = new ApplicationInfo(this.getApplicationContext(), this);
         showApplicationInfo();
 
         btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
+                applicationInfo.sendLogs();
             }
         });
 
@@ -65,39 +69,63 @@ public class Main extends AppCompatActivity {
         scrollLogs.post(new Runnable() {
             @Override
             public void run() {
-                scrollLogs.smoothScrollTo(0, txtLogs.getTop());
+                scrollLogs.smoothScrollTo(0, txtActivity.getTop());
             }
         });
 
         deviceInfo = new DeviceInfo(getApplicationContext());
         showDeviceInfo();
 
-        setupJob();
+        if(deviceInfo.isRooted)
+        {
+            alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            setupJob("LogRecorder", LogRecorder.class);
+            setupJob("DeltaRecorder", DeltaRecorder.class);
+            //setupJob("AverageRecorder", AverageRecorder.class);
+            setupJob("DecisionRecorder", DecisionRecorder.class);
+        }
+    }
+
+    public void updateActivity(String text)
+    {
+        txtActivity.setText(text);
     }
 
     /***
      *
      */
-    public void setupJob()
-    {
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, BehaviourAnalysis.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(),
-                15000, pendingIntent);
-    }
+    public void setupJob(String recorder, Class object) {
+        Intent intent = new Intent(this, object);
+        PendingIntent pendingIntent;
+        int requestCode = 0;
+        long millis = System.currentTimeMillis();
+        long minute = 60000;
+        long interval = 0;
 
-    /***
-     * Sets version number of the application
-     * Format: MAJOR.MINOR.PATCH-BUILD
-     */
-    public void setVersionNumber()
-    {
-        String versionNumber = "0.2.1";
-        String buildNumber = "181124" +
-                "";
-        TextView txtVersion = findViewById(R.id.txtVersion);
-        txtVersion.setText(versionNumber + "-" + buildNumber);
+        switch (recorder)
+        {
+            case "LogRecorder":
+                interval = minute * 1;
+                requestCode = 0;
+                break;
+            case "DeltaRecorder":
+                interval = minute * 20;
+                requestCode = 1;
+                break;
+            case "AverageRecorder":
+                interval = minute * 60;
+                requestCode = 2;
+                break;
+            case "DecisionRecorder":
+                interval = minute * 60 * 12;
+                requestCode = 3;
+                break;
+        }
+
+        millis += interval;
+        pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, 0);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, millis, interval, pendingIntent);
+        alarmManagers.add(alarmManager);
     }
 
     /***
@@ -110,31 +138,13 @@ public class Main extends AppCompatActivity {
         txtSecurityPatch.setText(deviceInfo.getSecurityPatch());
         txtWifiSecurity.setText(deviceInfo.wifiSecurity);
         txtRAMUsage.setText(deviceInfo.getRamUsage());
-        startReceiverBatteryHealth();
+        //startReceiverBatteryHealth();
     }
 
     private void showApplicationInfo()
     {
-        applicationInfo.getInstalledApplications(); //THIS LINE MUST ALWAYS GO BEFORE GET PERMISSIONS
-        /*if(deviceInfo.getRoot())
-        {
-            txtLogs.setText(applicationInfo.getProcessLogs());
-        }
-        else
-        {
-            txtLogs.setText(applicationInfo.getPermissions());
-        }
-        applicationInfo.getRunningAppInfo();*/
-
-        //applicationInfo.getRunningApplications();
-        //txtLogs.setText(applicationInfo.createProcessLogs(""));
-        //applicationInfo.getInstalledApplications();
-        //txtLogs.setText(applicationInfo.getPermissions());
-    }
-
-    private void transmitInfo()
-    {
-        new SocketClient().execute("Test\n");
+        //THIS LINE MUST ALWAYS GO BEFORE GET PERMISSIONS
+        applicationInfo.getInstalledApplications();
     }
 
     public void startReceiverBatteryHealth()

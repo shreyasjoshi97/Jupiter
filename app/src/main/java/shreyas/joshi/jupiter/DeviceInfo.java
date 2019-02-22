@@ -24,7 +24,7 @@ public class DeviceInfo
     public String versionNo;
     public String versionName;
     public String versionCode;
-    private boolean isRooted;
+    public boolean isRooted;
 
     public DeviceInfo(Context mContext)
     {

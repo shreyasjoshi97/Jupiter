@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /***
  *
@@ -60,7 +62,7 @@ public class FileIO {
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString;
                 StringBuilder stringBuilder = new StringBuilder();
 
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
@@ -77,6 +79,19 @@ public class FileIO {
         }
 
         return ret;
+    }
+
+    private Timestamp getTimeStamp() {
+        Date date = new Date();
+        long time = date.getTime();
+        return new Timestamp(time);
+    }
+
+    public void moveFile(String fileName)
+    {
+        String moveDir = folder + "/pastLogs" + fileName + getTimeStamp();
+        File file = new File(folder + fileName);
+        file.renameTo(new File(moveDir));
     }
 
     /***

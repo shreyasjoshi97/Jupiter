@@ -27,9 +27,21 @@
         </activity>
 
         <receiver
-            android:name=".BehaviourAnalysis"
+            android:name=".LogRecorder"
             android:enabled="true"
             android:exported="true" />
+        <receiver
+            android:name=".DeltaRecorder"
+            android:enabled="true"
+            android:exported="true"/>
+        <receiver
+            android:name=".AverageRecorder"
+            android:enabled="true"
+            android:exported="true"/>
+        <receiver
+            android:name=".DecisionRecorder"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>
