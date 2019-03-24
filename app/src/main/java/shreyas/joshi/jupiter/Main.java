@@ -40,13 +40,6 @@ public class Main extends AppCompatActivity implements UICallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        txtVersion = findViewById(R.id.txtVersion);
-        txtOSVersion = findViewById(R.id.txtOSVersion);
-        txtSecurityPatch = findViewById(R.id.txtSecurityPatch);
-        txtWifiSecurity = findViewById(R.id.txtWiFiSecurity);
-        txtBatteryHealth = findViewById(R.id.txtBatteryHealth);
-        txtRAMUsage = findViewById(R.id.txtRAMUsage);
         txtActivity = findViewById(R.id.txtLogs);
         txtServerMsg = findViewById(R.id.txtServerMsg);
         alarmManagers = new ArrayList<AlarmManager>();
@@ -81,7 +74,7 @@ public class Main extends AppCompatActivity implements UICallback {
             alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             setupJob("LogRecorder", LogRecorder.class);
             setupJob("DeltaRecorder", DeltaRecorder.class);
-            //setupJob("AverageRecorder", AverageRecorder.class);
+            setupJob("AverageRecorder", AverageRecorder.class);
             setupJob("DecisionRecorder", DecisionRecorder.class);
         }
     }

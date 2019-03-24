@@ -5,33 +5,62 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-public class DecisionRecorder extends BaseRecorder implements AsyncResponse {
+import java.util.HashMap;
+
+public class DecisionRecorder implements AsyncResponse {
     FileIO file;
     String averageFile = "delta.txt";
     // String deltaFile = "delta.txt";
     String decisionFile = "decisions.txt";
     String decisionLogs = "DecisionInfo";
-    float threshold = 0.5f;
+    float activeThreshold = 0.5f;
+    float idleThreshold = 0.5f;
+    Context context;
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
+    public DecisionRecorder(Context context)
+    {
+        this.context = context;
         file = new FileIO(context);
         Toast.makeText(context.getApplicationContext(),
-                "In Decision!", Toast.LENGTH_LONG).show();
-        sendLogs();
+                "In Decision", Toast.LENGTH_LONG).show();
     }
 
-    public void sendLogs()
+    public void sendLogs(String fileName)
     {
+        this.averageFile = fileName;
         SocketClient socketClient = new SocketClient();
         socketClient.delegate = this;
-        String contents = file.readFile(averageFile);
+        String contents = file.readFile(fileName);
         String data = contents.replace("\n", "$");
         socketClient.execute("~" + data + "\n");
     }
 
+    public HashMap<String, String> setHashMap()
+    {
+        HashMap<String, String> staticMap = new HashMap<String, String>();
+
+        if(!file.checkFileExists("Static Results.txt"))
+        {
+            ApplicationInfo appInfo = new ApplicationInfo(context);
+            appInfo.sendLogs();
+        }
+
+        String staticResults = file.readFile("Static Results.txt");
+        String[] resultsArray = staticResults.split("\n");
+
+        for(String result : resultsArray)
+        {
+            String[] splitResult = result.split(",");
+            staticMap.put(splitResult[0], splitResult[1]);
+        }
+
+        return staticMap;
+    }
+
     public void processOutput(String result)
     {
+        HashMap<String, String> staticMap = setHashMap();
+
         result = result.replace("$", "\n");
 
         String[] entries = result.split("\n");
@@ -39,19 +68,39 @@ public class DecisionRecorder extends BaseRecorder implements AsyncResponse {
         {
             String[] columns = entry.split(",");
             String name = columns[0];
-            float activeCPU = Float.parseFloat(columns[1]);
-            float idleCPU = Float.parseFloat(columns[2]);
-            float activeMem = Float.parseFloat(columns[3]);
-            float idleMem = Float.parseFloat(columns[4]);
+            float active_cpu_q1 = Float.parseFloat(columns[1]);
+            float active_cpu_q2 = Float.parseFloat(columns[2]);
+            float active_cpu_q3 = Float.parseFloat(columns[3]);
+            float idle_cpu_q1 = Float.parseFloat(columns[4]);
+            float idle_cpu_q2 = Float.parseFloat(columns[5]);
+            float idle_cpu_q3 = Float.parseFloat(columns[6]);
+            float active_mem_q1 = Float.parseFloat(columns[7]);
+            float active_mem_q2 = Float.parseFloat(columns[8]);
+            float active_mem_q3 = Float.parseFloat(columns[9]);
+            float idle_mem_q1 = Float.parseFloat(columns[10]);
+            float idle_mem_q2 = Float.parseFloat(columns[11]);
+            float idle_mem_q3 = Float.parseFloat(columns[12]);
 
-            if(activeCPU > threshold || idleCPU > threshold || activeMem > threshold
-                    || idleMem > threshold)
+            if(active_cpu_q1 > activeThreshold || active_cpu_q2 > activeThreshold || active_cpu_q3 > activeThreshold
+                    || idle_cpu_q1 > idleThreshold || idle_cpu_q2 > idleThreshold || idle_cpu_q3 > idleThreshold
+                    || active_mem_q1 > activeThreshold || active_mem_q2 > activeThreshold || active_mem_q3 > activeThreshold
+                    || idle_mem_q1 > idleThreshold || idle_mem_q2 > idleThreshold || idle_mem_q3 > idleThreshold)
             {
-                String reply = name + " is behaving suspiciously";
+                String decision = "";
+                if(staticMap.get(name) == "1")
+                {
+                    //SEND HELP
+                    decision = name + " - potential malware";
+                }
+                else if(staticMap.get(name) == "0")
+                {
+                    decision = name + " - suspicious";
+                }
+                file.writeToFile(decision, decisionFile);
             }
         }
 
-        file.writeToFile(result, decisionFile);
+        file.writeToFile(result, decisionLogs);
         Log.i(decisionLogs, result);
         file.moveFile(averageFile);
         file.deleteFile(averageFile);
