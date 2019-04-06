@@ -41,7 +41,6 @@ public class Main extends AppCompatActivity implements UICallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtActivity = findViewById(R.id.txtLogs);
-        txtServerMsg = findViewById(R.id.txtServerMsg);
         alarmManagers = new ArrayList<AlarmManager>();
         pendingIntents = new ArrayList<PendingIntent>();
 
@@ -67,7 +66,7 @@ public class Main extends AppCompatActivity implements UICallback {
         });
 
         deviceInfo = new DeviceInfo(getApplicationContext());
-        showDeviceInfo();
+        //showDeviceInfo();
 
         if(deviceInfo.isRooted)
         {

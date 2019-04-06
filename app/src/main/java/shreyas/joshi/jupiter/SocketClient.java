@@ -25,6 +25,7 @@ public class SocketClient extends AsyncTask<String, Void, String> {
     String socketLog = "SocketInfo";
     String serverUrl = "https://amaltheaserver.herokuapp.com/";
     String serverIP = "192.168.1.89";
+    //String serverIP = "10.30.37.144";
 
 
     /***

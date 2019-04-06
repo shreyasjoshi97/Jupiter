@@ -35,6 +35,13 @@ public class FileIO {
         try
         {
             File file = new File(folder + fileName);
+
+            if(!checkFileExists(folder))
+            {
+                File file2 = new File(folder);
+                file2.mkdirs();
+            }
+
             FileOutputStream fileOutputStream = new FileOutputStream(file, true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
             //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("C:\\Documents\\log.txt", Context.MODE_PRIVATE));

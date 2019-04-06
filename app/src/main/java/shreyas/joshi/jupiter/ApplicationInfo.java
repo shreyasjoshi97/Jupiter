@@ -197,7 +197,8 @@ public class ApplicationInfo implements AsyncResponse{
         result = result.replace("{", "");
         result = result.replace("}", "");
         result = result.replace("'", "");
-        combinedResults += result + "\n";
+        result += "\n";
+        combinedResults += result;
         uiCallback.updateActivity(combinedResults);
         file.writeToFile(result, storeName);
         Log.i(appInfo, result);

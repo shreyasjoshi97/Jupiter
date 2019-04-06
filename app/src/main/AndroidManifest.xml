@@ -17,7 +17,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Main"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".LogRecorder"
@@ -33,14 +39,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".Home"
-            android:label="Jupiter">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".Home" />
         <activity android:name=".Settings"></activity>
     </application>
 

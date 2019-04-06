@@ -50,7 +50,8 @@ public class DecisionRecorder implements AsyncResponse {
 
         for(String result : resultsArray)
         {
-            String[] splitResult = result.split(",");
+            result = result.trim();
+            String[] splitResult = result.split(":");
             staticMap.put(splitResult[0], splitResult[1]);
         }
 
@@ -90,7 +91,7 @@ public class DecisionRecorder implements AsyncResponse {
                 if(staticMap.get(name) == "1")
                 {
                     //SEND HELP
-                    decision = name + " - potential malware";
+                    decision = name + " - malicious";
                 }
                 else if(staticMap.get(name) == "0")
                 {
