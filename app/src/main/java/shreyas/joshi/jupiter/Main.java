@@ -2,12 +2,13 @@ package shreyas.joshi.jupiter;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -17,24 +18,25 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+//1344
 public class Main extends AppCompatActivity implements UICallback {
     DeviceInfo deviceInfo;
-    ApplicationInfo applicationInfo;
+    StaticAnalysis staticAnalysis;
     AlarmManager alarmManager;
     //PendingIntent pendingIntent;
     List<AlarmManager> alarmManagers;
     List<PendingIntent> pendingIntents;
 
     ScrollView scrollLogs;
-    TextView txtVersion;
     TextView txtOSVersion;
     TextView txtSecurityPatch;
     TextView txtWifiSecurity;
-    TextView txtBatteryHealth;
     TextView txtRAMUsage;
     TextView txtActivity;
     TextView txtServerMsg;
     Button btnSend;
+    Button btnSettings;
+    Button btnRecent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +45,51 @@ public class Main extends AppCompatActivity implements UICallback {
         txtActivity = findViewById(R.id.txtLogs);
         alarmManagers = new ArrayList<AlarmManager>();
         pendingIntents = new ArrayList<PendingIntent>();
+        deviceInfo = new DeviceInfo(getApplicationContext());
 
-        txtActivity.setText("");
+        txtActivity.setText("SCAN - Perform a quick scan\n" +
+                "RECENT - View most recent results (ROOT)\n" +
+                "SETTINGS - Change sensitivity (FOR ADVANCED USERS ONLY)");
 
-        applicationInfo = new ApplicationInfo(this.getApplicationContext(), this);
-        showApplicationInfo();
+        staticAnalysis = new StaticAnalysis(this.getApplicationContext(), this);
 
         btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                txtActivity.setText("List of suspicious applications:\n\n");
                 Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
-                applicationInfo.sendLogs();
+                staticAnalysis.sendLogs();
+            }
+        });
+
+        btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(deviceInfo.isRooted) {
+                    Intent intent = new Intent(Main.this, Settings.class);
+                    startActivity(intent);
+                } else {
+                    txtActivity.setText("THIS FEATURE IS FOR ROOTED DEVICES ONLY");
+                }
+            }
+        });
+
+        btnRecent = findViewById(R.id.btnRecentResults);
+        btnRecent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(deviceInfo.isRooted) {
+                    FileIO file = new FileIO(getApplicationContext());
+                    String results = file.readFile("decisions.txt");
+                    String[] lines = results.split("\n");
+                    for(String line : lines)
+                    {
+                        updateActivity(line);
+                    }
+                    //txtActivity.setText(results);
+                } else {
+                    txtActivity.setText("THIS FEATURE IS FOR ROOTED DEVICES ONLY");
+                }
             }
         });
 
@@ -64,23 +100,37 @@ public class Main extends AppCompatActivity implements UICallback {
                 scrollLogs.smoothScrollTo(0, txtActivity.getTop());
             }
         });
-
-        deviceInfo = new DeviceInfo(getApplicationContext());
         //showDeviceInfo();
 
         if(deviceInfo.isRooted)
         {
-            alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
             setupJob("LogRecorder", LogRecorder.class);
-            setupJob("DeltaRecorder", DeltaRecorder.class);
-            setupJob("AverageRecorder", AverageRecorder.class);
-            setupJob("DecisionRecorder", DecisionRecorder.class);
+            /*setupJob("AverageRecorder", AverageRecorder.class);
+            setupJob("DecisionRecorder", DecisionRecorder.class);*/
         }
     }
 
     public void updateActivity(String text)
     {
-        txtActivity.setText(text);
+        ForegroundColorSpan fgSpan = new ForegroundColorSpan(Color.DKGRAY);
+        SpannableString spannableString = new SpannableString(text);
+        int startIndex = 0;
+        int endIndex = 0;
+        if(text.contains("suspicious"))
+        {
+            fgSpan = new ForegroundColorSpan(Color.parseColor("#FF8B00"));
+            startIndex = text.indexOf("suspicious");
+            endIndex = startIndex + 10;
+        }
+        else if(text.contains("malicious"))
+        {
+            fgSpan = new ForegroundColorSpan(Color.RED);
+            startIndex = text.indexOf("malicious");
+            endIndex = startIndex + 9;
+        }
+        spannableString.setSpan(fgSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        txtActivity.append(spannableString);
     }
 
     /***
@@ -131,23 +181,5 @@ public class Main extends AppCompatActivity implements UICallback {
         txtWifiSecurity.setText(deviceInfo.wifiSecurity);
         txtRAMUsage.setText(deviceInfo.getRamUsage());
         //startReceiverBatteryHealth();
-    }
-
-    private void showApplicationInfo()
-    {
-        //THIS LINE MUST ALWAYS GO BEFORE GET PERMISSIONS
-        applicationInfo.getInstalledApplications();
-    }
-
-    public void startReceiverBatteryHealth()
-    {
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                txtBatteryHealth.setText(deviceInfo.getBatteryHealth(intent));
-            }
-        };
-        Main.this.registerReceiver(broadcastReceiver, intentFilter);
     }
 }

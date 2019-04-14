@@ -14,27 +14,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2a34250-7f5f-4f15-9083-dd8c637cc7c2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jupiter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Jupiter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/ApplicationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/ApplicationInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/ApplicationInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/StaticAnalysis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageRecorder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,34 +79,39 @@
     <session id="1307738272">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.62" value="1" />
+          <entry key="project.open.time.65" value="1" />
+          <entry key="project.open.time.89" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="6" />
-          <entry key="xml" value="1" />
+          <entry key="java" value="63" />
+          <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="6" />
-          <entry key="XML" value="1" />
+          <entry key="JAVA" value="63" />
+          <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="183" />
-          <entry key="txt" value="5" />
+          <entry key="dummy" value="14" />
+          <entry key="java" value="6399" />
+          <entry key="txt" value="93" />
           <entry key="xml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="183" />
-          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="JAVA" value="6399" />
+          <entry key="PLAIN_TEXT" value="107" />
           <entry key="XML" value="6" />
         </counts>
       </usages-collector>
@@ -107,39 +123,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="114" column="9" selection-start-line="114" selection-start-column="9" selection-end-line="114" selection-end-column="9" />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Settings.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/StaticAnalysis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="55" column="43" lean-forward="true" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+            <state relative-caret-position="-801">
+              <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2682#2683#0" expanded="true" />
-                <element signature="e#2723#2724#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="-1011">
+              <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,26 +158,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/ApplicationInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
+            <state relative-caret-position="324">
+              <caret line="122" selection-start-line="121" selection-end-line="122" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -174,35 +167,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageRecorder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-186">
+              <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionRecorder.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/UICallback.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-103">
-              <caret line="53" column="50" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-615">
-              <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+            <state relative-caret-position="45">
+              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -224,7 +202,12 @@
       <find>readFile</find>
       <find>getProcessLogs</find>
       <find>getPermissions</find>
+      <find>Score</find>
+      <find>getInstalledApplications</find>
     </findStrings>
+    <replaceStrings>
+      <replace>Threshold</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2254,28 +2237,29 @@
         <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageCalculator.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionMaker.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/BaseRecorder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageRecorder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Home.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageRecorder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Settings.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/ApplicationInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/StaticAnalysis.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionRecorder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="974" />
-    <option name="height" value="1057" />
+    <option name="y" value="27" />
+    <option name="width" value="683" />
+    <option name="height" value="741" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -2283,18 +2267,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="Jupiter" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="Jupiter" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="Jupiter" type="1abcf292:AndroidViewProjectNode" />
@@ -2309,6 +2288,17 @@
             </path>
             <path>
               <item name="Jupiter" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Jupiter" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Jupiter" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -2316,7 +2306,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2516,6 +2506,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26136363" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -2526,18 +2517,18 @@
       <window_info id="Designer" order="6" />
       <window_info id="Favorites" order="7" weight="0.32995737" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3296582" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3283582" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48720682" weight="0.26350605" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4968017" weight="0.30278233" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4968017" weight="0.3018242" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4978678" weight="0.3296582" />
       <window_info anchor="bottom" id="Android Profiler" order="7" sideWeight="0.4978678" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289689" />
-      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.4978678" weight="0.3289689" />
+      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.4978678" weight="0.32669982" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4978678" weight="0.32733223" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.47811815" side_tool="true" weight="0.3674833" />
-      <window_info anchor="bottom" id="Logcat" order="12" sideWeight="0.5218818" visible="true" weight="0.3666121" />
+      <window_info anchor="bottom" id="Logcat" order="12" sideWeight="0.5218818" weight="0.36650082" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -2546,67 +2537,43 @@
       <window_info anchor="right" id="Gradle" order="5" weight="0.32995737" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Preview" order="8" />
+      <window_info anchor="right" id="Preview" order="8" weight="0.32954547" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13539445" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26136363" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
-      <window_info id="Captures" order="4" weight="0.25" />
+      <window_info id="Captures" order="4" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Favorites" order="7" weight="0.32995737" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48720682" weight="0.26571113" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4968017" weight="0.3627343" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3283582" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48720682" weight="0.26350605" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4968017" weight="0.3018242" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4978678" weight="0.3296582" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" sideWeight="0.4978678" weight="0.3296582" />
-      <window_info anchor="bottom" id="Logcat" order="8" sideWeight="0.48720682" weight="0.75303197" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3296582" />
-      <window_info anchor="bottom" id="Build" order="10" sideWeight="0.4978678" weight="0.3296582" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4978678" weight="0.3296582" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5127932" side_tool="true" weight="0.2546858" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" sideWeight="0.4978678" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289689" />
+      <window_info anchor="bottom" id="Build" order="9" sideWeight="0.4978678" weight="0.32669982" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4978678" weight="0.32733223" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.47811815" side_tool="true" weight="0.3674833" />
+      <window_info anchor="bottom" id="Logcat" order="12" sideWeight="0.5218818" weight="0.36650082" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" weight="0.32995737" />
+      <window_info anchor="right" id="Device File Explorer" order="3" sideWeight="0.42888644" side_tool="true" weight="0.4632196" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Gradle" order="5" />
+      <window_info anchor="right" id="Gradle" order="5" weight="0.32995737" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Preview" order="8" />
+      <window_info anchor="right" id="Preview" order="8" weight="0.32954547" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java</url>
-          <line>19</line>
-          <properties />
-          <option name="timeStamp" value="190" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java</url>
-          <line>47</line>
-          <properties />
-          <option name="timeStamp" value="193" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java</url>
-          <line>25</line>
-          <properties />
-          <option name="timeStamp" value="200" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
@@ -2634,29 +2601,8 @@
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/app/Activity.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/os/Looper.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/app/ActivityThread.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AsyncResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/view/View.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/UICallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/content/BroadcastReceiver.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/BaseRecorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="61" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-28/android/app/AlarmManager.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/app/Activity.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/os/AsyncTask.java" />
@@ -2675,76 +2621,149 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
           <caret line="42" column="54" selection-start-line="42" selection-start-column="54" selection-end-line="42" selection-end-column="54" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java">
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/os/AsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="131">
+          <caret line="566" selection-start-line="566" selection-end-line="566" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/BaseRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="61" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Android/Sdk/sources/android-28/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="2666" selection-start-line="2666" selection-end-line="2666" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        <state relative-caret-position="60">
+          <caret line="58" column="43" selection-start-line="58" selection-start-column="43" selection-end-line="58" selection-end-column="43" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/ApplicationInfo.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AsyncResponse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
+        <state relative-caret-position="45">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-726">
+          <caret line="65" column="51" selection-start-line="65" selection-start-column="51" selection-end-line="65" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Settings.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-615">
-          <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+        <state relative-caret-position="410">
+          <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DecisionRecorder.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="53" column="50" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
+        <state relative-caret-position="-2376">
+          <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-471">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/LogRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-756">
+          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/SocketClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="114" column="9" selection-start-line="114" selection-start-column="9" selection-end-line="114" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/StaticAnalysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-801">
+          <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/UICallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1011">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="122" selection-start-line="121" selection-end-line="122" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2753,44 +2772,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/AverageRecorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeviceInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/FileIO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/DeltaRecorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/shreyas/joshi/jupiter/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="55" column="43" lean-forward="true" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2682#2683#0" expanded="true" />
-            <element signature="e#2723#2724#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-186">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
         </state>
       </provider>
     </entry>

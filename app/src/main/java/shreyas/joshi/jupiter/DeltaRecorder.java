@@ -28,14 +28,6 @@ public class DeltaRecorder extends BaseRecorder implements AsyncResponse {
             String contents = file.readFile(logFile);
             String data = contents.replace("\n", "$");
             socketClient.execute("^" + data + "\n");
-
-            /*BufferedReader bufferedReader = new BufferedReader(new StringReader(contents));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                send += line;
-                send.replaceAll("\n", "$");
-                socketClient.execute("^" + send);
-            }*/
         } catch (Exception ex) {
             Log.i(deltaLogs, ex.getMessage());
         }
@@ -44,7 +36,7 @@ public class DeltaRecorder extends BaseRecorder implements AsyncResponse {
     public void processOutput(String result)
     {
         result = result.replace("$", "\n");
-        file.writeToFile(result, deltaFile);
+        file.writeToFile(result, deltaFile, true);
         Log.i(deltaLogs, result);
         file.deleteFile(logFile);
     }

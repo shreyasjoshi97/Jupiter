@@ -52,7 +52,7 @@ public class SocketClient extends AsyncTask<String, Void, String> {
             connection.setDoOutput(true);
             connection.connect();*/
             InetAddress inetAddress = InetAddress.getByName(serverIP);
-            Socket connection = new Socket(inetAddress, 7000);
+            Socket connection = new Socket(inetAddress, 50000);
 
             try
             {
@@ -110,24 +110,9 @@ public class SocketClient extends AsyncTask<String, Void, String> {
 
         for(String line : lines)
         {
-            /*if(line.contains("Result Start"))
-            {
-                line = line.replace("Result Start ", "");
-                line = line.replace(" Result End", "");
-                line = line.replace("{", "");
-                line = line.replace("}", "");
-                line = line.replace("'", "");
-                line = line.trim();
-                result += line + "\n";
-                Log.i(socketLog, line);
-
-                break;
-            }*/
             result += line + "\n";
             Log.i(socketLog, line);
         }
-
-        //result = matcher.group(1);
     }
 }
 

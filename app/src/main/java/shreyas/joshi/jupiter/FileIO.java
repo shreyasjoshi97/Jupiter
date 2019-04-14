@@ -26,11 +26,11 @@ public class FileIO {
     }
 
     /***
-     *
-     * @param data
-     * @param fileName
+     * Appends data to appropriate file
+     * @param data String to be written to file
+     * @param fileName Name of file
      */
-    public void writeToFile(String data, String fileName)
+    public void writeToFile(String data, String fileName, boolean append)
     {
         try
         {
@@ -42,9 +42,8 @@ public class FileIO {
                 file2.mkdirs();
             }
 
-            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            FileOutputStream fileOutputStream = new FileOutputStream(file, append);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-            //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("C:\\Documents\\log.txt", Context.MODE_PRIVATE));
             outputStreamWriter.append(data);
             outputStreamWriter.close();
         }
@@ -55,9 +54,9 @@ public class FileIO {
     }
 
     /***
-     *
-     * @param fileName
-     * @return
+     * Reads file
+     * @param fileName Name of file to be read
+     * @return Contents of file
      */
     public String readFile(String fileName)
     {
@@ -88,13 +87,21 @@ public class FileIO {
         return ret;
     }
 
+    /***
+     *
+     * @return Current timestamp
+     */
     private Timestamp getTimeStamp() {
         Date date = new Date();
         long time = date.getTime();
         return new Timestamp(time);
     }
 
-    public void moveFile(String fileName)
+    /***
+     * Renames file to filename + timestamp
+     * @param fileName Name of file to be renamed
+     */
+    public void renameFile(String fileName)
     {
         String moveDir = folder + "/pastLogs" + fileName + getTimeStamp();
         File file = new File(folder + fileName);
@@ -102,8 +109,8 @@ public class FileIO {
     }
 
     /***
-     *
-     * @param fileName
+     * Deletes file
+     * @param fileName Name of file to be deleted
      */
     public void deleteFile(String fileName)
     {
@@ -112,9 +119,9 @@ public class FileIO {
     }
 
     /***
-     *
-     * @param fileName
-     * @return
+     * Checks if the file exists
+     * @param fileName Name of file
+     * @return True if the file exists, false if it does not
      */
     public boolean checkFileExists(String fileName)
     {

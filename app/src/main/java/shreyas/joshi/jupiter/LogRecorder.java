@@ -3,6 +3,7 @@ package shreyas.joshi.jupiter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class LogRecorder extends BroadcastReceiver {
     Timestamp timestamp;
     FileIO file;
     List<String> installedApps;
+    DeviceInfo deviceInfo;
     int i = 0;
     //behaviourTask bTask;
 
@@ -33,14 +36,27 @@ public class LogRecorder extends BroadcastReceiver {
             Log.i(bInfo, "Receiving");
             this.context = context;
             timestamp = getTimeStamp();
-            ApplicationInfo a = new ApplicationInfo(context);
-            installedApps = a.getInstalledApplications();
+            deviceInfo = new DeviceInfo(context);
+            List<ResolveInfo> installedPackages = deviceInfo.getInstalledPackages();
+            setInstalledApps(installedPackages);
             file = new FileIO(context);
             createProcessLogs();
         } catch (Exception ex) {
             Log.i(bInfo, ex.getMessage());
         }
     }
+
+    public void setInstalledApps(List<ResolveInfo> packages)
+    {
+        installedApps = new ArrayList<String>();
+        for(ResolveInfo package1 : packages)
+        {
+            String packageName = package1.activityInfo.applicationInfo.packageName;
+            installedApps.add(packageName);
+
+        }
+    }
+
 
     /***
      *
@@ -94,10 +110,16 @@ public class LogRecorder extends BroadcastReceiver {
             }
         }
 
-        file.writeToFile(serverMessage, logFile);
+        file.writeToFile(serverMessage, logFile, true);
 
         Log.i(bInfo, file.readFile(logFile));
     }
+
+    public String getAppName()
+    {
+        return "";
+    }
+
 
     /***
      *

@@ -1,6 +1,5 @@
 package shreyas.joshi.jupiter;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -8,7 +7,7 @@ import android.util.Log;
 public class AverageRecorder extends BaseRecorder implements AsyncResponse {
     FileIO file;
     String averageFile = "averages.txt";
-    String deltaFile = "delta.txt";
+    String logFile = "log.txt";
     String avgLogs = "AverageInfo";
     int maxEntries = 7;
     Context context;
@@ -24,7 +23,7 @@ public class AverageRecorder extends BaseRecorder implements AsyncResponse {
     {
         SocketClient socketClient = new SocketClient();
         socketClient.delegate = this;
-        String contents = file.readFile(deltaFile);
+        String contents = file.readFile(logFile);
         String data = contents.replace("\n", "$");
         socketClient.execute("+" + data + "\n");
     }
@@ -47,7 +46,7 @@ public class AverageRecorder extends BaseRecorder implements AsyncResponse {
         for(String average : resultArray) {
             String[] splitAverage = average.split(",");
             String name = splitAverage[0];
-            file.writeToFile(average, name);
+            file.writeToFile(average, name, true);
 
             if (maxNumber(file.readFile(name)))
             {
@@ -56,9 +55,9 @@ public class AverageRecorder extends BaseRecorder implements AsyncResponse {
         }
 
         result = result.replace("$", "\n");
-        file.writeToFile(result, averageFile);
+        file.writeToFile(result, averageFile, true);
         Log.i(avgLogs, result);
-        file.moveFile(deltaFile);
-        file.deleteFile(deltaFile);
+        file.renameFile(logFile);
+        file.deleteFile(logFile);
     }
 }
