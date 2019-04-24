@@ -118,7 +118,7 @@ public class StaticAnalysis implements AsyncResponse{
                 socketClient.delegate = this;
                 socketClient.execute(data);
             }
-            sendNotification("Finished scan", "The Quick Scan has been completed");
+            //sendNotification("Finished scan", "The Quick Scan has been completed");
         }
         catch (Exception ex)
         {
@@ -134,9 +134,9 @@ public class StaticAnalysis implements AsyncResponse{
         result = result.replace("'", "");
         result += "\n";
         file.writeToFile(result, storeName, true);
-        if(result.contains(": 1"))
+        if(result.contains(",1"))
         {
-            result = result.replace(": 1", " - suspicious");
+            result = result.replace(",1", " - Malicious");
             uiCallback.updateActivity(result);
         }
         Log.i(appInfo, result);

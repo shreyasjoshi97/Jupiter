@@ -8,47 +8,50 @@
 
     <SeekBar
         android:id="@+id/seekActive"
-        android:layout_width="246dp"
+        android:layout_width="286dp"
         android:layout_height="40dp"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtActiveSens" />
 
     <SeekBar
         android:id="@+id/seekIdle"
-        android:layout_width="245dp"
+        android:layout_width="291dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="140dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIdleSens"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.408" />
 
     <TextView
         android:id="@+id/txtIdleSens"
-        android:layout_width="155dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="8dp"
         android:text="Idle Sensitivity"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.286"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekActive" />
 
     <TextView
         android:id="@+id/txtActiveSens"
-        android:layout_width="164dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="254dp"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="96dp"
+        android:layout_marginEnd="8dp"
         android:text="Active Sensitivity"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.299"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,57 +61,68 @@
         android:id="@+id/txtIdleHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:text="High"
+        android:layout_marginBottom="8dp"
+        android:text="Low"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/seekIdle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIdleSens"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.285" />
+
+    <TextView
+        android:id="@+id/txtIdleHigh2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Low"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/seekActive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtActiveSens" />
 
     <TextView
         android:id="@+id/txtIdleLow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="68dp"
         android:layout_marginTop="8dp"
-        android:text="Low"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="High"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/seekIdle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtIdleSens"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.285" />
 
     <TextView
-        android:id="@+id/txtActive"
-        android:layout_width="242dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/txtIdleLow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="8dp"
-        android:text="Active Score"
-        app:layout_constraintBottom_toTopOf="@+id/txtIdleSens"
+        android:text="High"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/seekActive"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekActive"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintTop_toBottomOf="@+id/txtActiveSens" />
 
     <TextView
-        android:id="@+id/txtIdle"
-        android:layout_width="238dp"
-        android:layout_height="41dp"
+        android:id="@+id/textView"
+        android:layout_width="290dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Idle Score"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Adjust the sliders to make the system more or less sensitive"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtActiveSens"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.566"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekIdle"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

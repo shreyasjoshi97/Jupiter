@@ -1,10 +1,12 @@
 package shreyas.joshi.jupiter;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -26,6 +28,8 @@ public class Main extends AppCompatActivity implements UICallback {
     //PendingIntent pendingIntent;
     List<AlarmManager> alarmManagers;
     List<PendingIntent> pendingIntents;
+    String decisionFile = "decisions.txt";
+    boolean decision;
 
     ScrollView scrollLogs;
     TextView txtOSVersion;
@@ -37,15 +41,18 @@ public class Main extends AppCompatActivity implements UICallback {
     Button btnSend;
     Button btnSettings;
     Button btnRecent;
+    Button btnDismiss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        decision = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtActivity = findViewById(R.id.txtLogs);
         alarmManagers = new ArrayList<AlarmManager>();
         pendingIntents = new ArrayList<PendingIntent>();
         deviceInfo = new DeviceInfo(getApplicationContext());
+        final FileIO file = new FileIO(getApplicationContext());
 
         txtActivity.setText("SCAN - Perform a quick scan\n" +
                 "RECENT - View most recent results (ROOT)\n" +
@@ -53,12 +60,27 @@ public class Main extends AppCompatActivity implements UICallback {
 
         staticAnalysis = new StaticAnalysis(this.getApplicationContext(), this);
 
+        btnDismiss = findViewById(R.id.btnDismiss);
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtActivity.setText("Results dismissed!");
+                if(decision)
+                {
+                    //file.deleteFile(decisionFile);
+                }
+
+            }
+        });
+
         btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                txtActivity.setText("List of suspicious applications:\n\n");
-                Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
+                decision = false;
+                txtActivity.setText("RESULTS OF QUICK SCAN:\n\n");
+                //Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
                 staticAnalysis.sendLogs();
+                sendNotification("Finished quick scan", "The Quick Scan has been completed");
             }
         });
 
@@ -79,14 +101,7 @@ public class Main extends AppCompatActivity implements UICallback {
             @Override
             public void onClick(View v) {
                 if(deviceInfo.isRooted) {
-                    FileIO file = new FileIO(getApplicationContext());
-                    String results = file.readFile("decisions.txt");
-                    String[] lines = results.split("\n");
-                    for(String line : lines)
-                    {
-                        updateActivity(line);
-                    }
-                    //txtActivity.setText(results);
+                    readDecisions();
                 } else {
                     txtActivity.setText("THIS FEATURE IS FOR ROOTED DEVICES ONLY");
                 }
@@ -106,8 +121,8 @@ public class Main extends AppCompatActivity implements UICallback {
         {
             alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
             setupJob("LogRecorder", LogRecorder.class);
-            /*setupJob("AverageRecorder", AverageRecorder.class);
-            setupJob("DecisionRecorder", DecisionRecorder.class);*/
+            setupJob("SummaryRecorder", SummaryRecorder.class);
+            setupJob("DecisionRecorder", DecisionRecorder.class);
         }
     }
 
@@ -117,16 +132,16 @@ public class Main extends AppCompatActivity implements UICallback {
         SpannableString spannableString = new SpannableString(text);
         int startIndex = 0;
         int endIndex = 0;
-        if(text.contains("suspicious"))
+        if(text.contains("Suspicious"))
         {
             fgSpan = new ForegroundColorSpan(Color.parseColor("#FF8B00"));
-            startIndex = text.indexOf("suspicious");
+            startIndex = text.indexOf("Suspicious");
             endIndex = startIndex + 10;
         }
-        else if(text.contains("malicious"))
+        else if(text.contains("Malicious"))
         {
             fgSpan = new ForegroundColorSpan(Color.RED);
-            startIndex = text.indexOf("malicious");
+            startIndex = text.indexOf("Malicious");
             endIndex = startIndex + 9;
         }
         spannableString.setSpan(fgSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -150,12 +165,8 @@ public class Main extends AppCompatActivity implements UICallback {
                 interval = minute * 1;
                 requestCode = 0;
                 break;
-            case "DeltaRecorder":
-                interval = minute * 20;
-                requestCode = 1;
-                break;
-            case "AverageRecorder":
-                interval = minute * 60;
+            case "SummaryRecorder":
+                interval = minute * 120;
                 requestCode = 2;
                 break;
             case "DecisionRecorder":
@@ -182,4 +193,41 @@ public class Main extends AppCompatActivity implements UICallback {
         txtRAMUsage.setText(deviceInfo.getRamUsage());
         //startReceiverBatteryHealth();
     }
+
+    public void sendNotification(String title, String text)
+    {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setContentTitle(title)
+                .setContentText(text);
+
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext()
+                        .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+        notificationManager.notify(001, mBuilder.build());
+    }
+
+    public void readDecisions()
+    {
+        FileIO file = new FileIO(getApplicationContext());
+        if(!file.checkFileExists(decisionFile))
+        {
+            txtActivity.setText("Full scan results are not ready!\nPlease wait" +
+                    " for the notification");
+        }
+        else
+        {
+            decision = true;
+            txtActivity.setText("RESULTS OF FULL SCAN:\n");
+
+            String results = file.readFile(decisionFile);
+            String[] lines = results.split("\n");
+            for (String line : lines) {
+                updateActivity(line + "\n");
+            }
+            txtActivity.append("\nRECOMMENDATIONS:\n");
+            updateActivity("Uninstall Malicious applications immediately\n");
+            updateActivity("Uninstall Suspicious applications if untrustworthy\n");
+        }
+    }
+
 }

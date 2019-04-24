@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-public class AverageRecorder extends BaseRecorder implements AsyncResponse {
+public class SummaryRecorder extends BaseRecorder implements AsyncResponse {
     FileIO file;
     String averageFile = "averages.txt";
     String logFile = "log.txt";

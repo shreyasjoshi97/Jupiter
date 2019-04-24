@@ -10,77 +10,89 @@
     <ScrollView
         android:id="@+id/scrollLogs"
         android:layout_width="351dp"
-        android:layout_height="501dp"
+        android:layout_height="486dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnRecentResults"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.057">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="fill"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtLogs"
-                android:layout_width="330dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="28dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginStart="24dp"
                 android:text="TextView"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="215dp" />
+                tools:layout_editor_absoluteY="129dp" />
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="Send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
         android:id="@+id/btnRecentResults"
-        android:layout_width="wrap_content"
+        android:layout_width="157dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="Recent"
+        android:layout_marginBottom="88dp"
+        android:text="Full Results"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="156dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="236dp"
+        android:layout_marginBottom="16dp"
+        android:text="Quick Scan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.981" />
 
     <Button
         android:id="@+id/btnSettings"
-        android:layout_width="97dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="232dp"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="184dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintVertical_bias="0.967" />
+
+    <Button
+        android:id="@+id/btnDismiss"
+        android:layout_width="171dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="88dp"
+        android:text="Dismiss"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

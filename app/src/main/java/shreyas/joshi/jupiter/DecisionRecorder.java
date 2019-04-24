@@ -25,7 +25,9 @@ public class DecisionRecorder implements AsyncResponse {
         Toast.makeText(context.getApplicationContext(),
                 "In Decision", Toast.LENGTH_LONG).show();
         activeThreshold = getThreshold(file.readFile("Active Threshold.txt"));
+        activeThreshold *= 3;
         idleThreshold = getThreshold(file.readFile("Idle Threshold.txt"));
+        idleThreshold *= 0.2;
 
     }
 
@@ -33,7 +35,7 @@ public class DecisionRecorder implements AsyncResponse {
     {
         value = value.replace("\n", "");
         float threshold = Float.parseFloat(value);
-        threshold /= 10;
+        threshold /= 100;
         return threshold;
     }
 
@@ -63,7 +65,7 @@ public class DecisionRecorder implements AsyncResponse {
         for(String result : resultsArray)
         {
             result = result.trim();
-            String[] splitResult = result.split(": ");
+            String[] splitResult = result.split(",");
             staticMap.put(splitResult[0], splitResult[1]);
         }
 

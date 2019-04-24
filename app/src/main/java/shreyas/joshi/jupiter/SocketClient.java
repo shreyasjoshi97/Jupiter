@@ -24,9 +24,9 @@ public class SocketClient extends AsyncTask<String, Void, String> {
     public String result = "";
     String socketLog = "SocketInfo";
     String serverUrl = "https://amaltheaserver.herokuapp.com/";
-    String serverIP = "192.168.1.89";
+    //String serverIP = "192.168.1.89";
     //String serverIP = "10.30.37.144";
-
+    String serverIP = "10.30.37.182";
 
     /***
      *
@@ -52,7 +52,7 @@ public class SocketClient extends AsyncTask<String, Void, String> {
             connection.setDoOutput(true);
             connection.connect();*/
             InetAddress inetAddress = InetAddress.getByName(serverIP);
-            Socket connection = new Socket(inetAddress, 50000);
+            Socket connection = new Socket(inetAddress, 5000);
 
             try
             {

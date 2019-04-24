@@ -16,27 +16,31 @@ public class Settings extends AppCompatActivity {
             FileIO fileIO = new FileIO(this);
 
             SeekBar seekActive = findViewById(R.id.seekActive);
-            final TextView txtActive = findViewById(R.id.txtActive);
             seekActive.setMax(10);
             if (fileIO.checkFileExists("Active Threshold.txt")) {
                 int progress = getThreshold(fileIO.readFile("Active Threshold.txt"));
+                progress = 10 - progress;
                 seekActive.setProgress(progress);
             }
 
             SeekBar seekIdle = findViewById(R.id.seekIdle);
-            final TextView txtIdle = findViewById(R.id.txtIdle);
             seekIdle.setMax(10);
             if (fileIO.checkFileExists("Idle Threshold.txt")) {
                 int progress = getThreshold(fileIO.readFile("Idle Threshold.txt"));
+                progress = 10 - progress;
                 seekIdle.setProgress(progress);
             }
 
             seekActive.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    txtActive.setText(String.valueOf(progress));
+                    int finalProgress = 10 - progress;
+                    if(finalProgress < 1)
+                    {
+                        finalProgress = 1;
+                    }
                     FileIO fileIO = new FileIO(getApplicationContext());
-                    fileIO.writeToFile(Integer.toString(progress), "Active Threshold.txt", false);
+                    fileIO.writeToFile(Integer.toString(finalProgress), "Active Threshold.txt", false);
 
                 }
 
@@ -55,9 +59,13 @@ public class Settings extends AppCompatActivity {
             seekIdle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    txtIdle.setText(String.valueOf(progress));
+                    int finalProgress = 10 - progress;
+                    if(finalProgress < 1)
+                    {
+                        finalProgress = 1;
+                    }
                     FileIO fileIO = new FileIO(getApplicationContext());
-                    fileIO.writeToFile(Integer.toString(progress), "Idle Threshold.txt", false);
+                    fileIO.writeToFile(Integer.toString(finalProgress), "Idle Threshold.txt", false);
                 }
 
                 @Override

@@ -34,13 +34,13 @@
             android:enabled="true"
             android:exported="true" />
         <receiver
-            android:name=".AverageRecorder"
+            android:name=".SummaryRecorder"
             android:enabled="true"
             android:exported="true" />
 
         <activity
             android:name=".Home" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings"></activity>`
     </application>
 
 </manifest>
