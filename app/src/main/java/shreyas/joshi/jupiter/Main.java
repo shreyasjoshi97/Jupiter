@@ -55,7 +55,8 @@ public class Main extends AppCompatActivity implements UICallback {
         final FileIO file = new FileIO(getApplicationContext());
 
         txtActivity.setText("SCAN - Perform a quick scan\n" +
-                "RECENT - View most recent results (ROOT)\n" +
+                "FULL RESULTS - View full scan results\n" +
+                "DISMISS - Dismiss the results\n" +
                 "SETTINGS - Change sensitivity (FOR ADVANCED USERS ONLY)");
 
         staticAnalysis = new StaticAnalysis(this.getApplicationContext(), this);
@@ -80,7 +81,8 @@ public class Main extends AppCompatActivity implements UICallback {
                 txtActivity.setText("RESULTS OF QUICK SCAN:\n\n");
                 //Toast.makeText(getApplicationContext(), "DONE!", Toast.LENGTH_SHORT).show();
                 staticAnalysis.sendLogs();
-                sendNotification("Finished quick scan", "The Quick Scan has been completed");
+                sendNotification("Suspicious application behaviour!",
+                        "Click 'Full Results' button to find out more");
             }
         });
 
